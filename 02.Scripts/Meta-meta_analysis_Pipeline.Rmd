@@ -1,0 +1,459 @@
+---
+title: "Meta-analysis of meta-analyses pipeline"
+author: "Christina Raw"
+date: "9/5/2022"
+output: html_document
+---
+
+ <!-- change style to a nicer one -->
+  <!-- imrpvoe how headers are seen -->
+   <!-- recommend CEE guidelines -->
+
+# What is a meta-analyis
+
+A meta-analysis is a statistical analysis of results of individual studies to integrate and contrast them (Glass, 1976). It allows to observe an overall effect, formulate hypotheses, and find research gaps (Katayama et al., 2019). It also allows  to perform moderator analyses to test possible sources of heterogeneity in the results.
+
+As a visual example: 
+
+![](Rmd_Images/MA.png)
+
+# Steps in a meta-analysis
+
+A meta-analysis consists of 7 steps:
+
+  1. Question formulation
+  2. Pilot phase
+  3. Scoping phase
+  4. Screening phase
+  5. Data extraction phase
+  6. Effect size calculation
+  7. Meta-analysis 
+  8. Estimate of the time invested on each step
+
+For a more information on the steps 1 to 5, read the meta-methods document, which can be found in the resources folder (00.Resources > 00.Meta-methods.docx)
+
+## 1.  formulation 
+
+What is the research question? To formulate the research question, apply the PICO framework: define the Population, Intervention, Comparator, and the Outcome of interest. 
+
+*Example*: what is the impact of sustainable agricultural production systems on biodiversity relative to conventional production systems?
+
+- Population: biodiversity
+- Intervention: sustainable agricultural production systems
+- Comparator: conventional agriculture
+- Outcome: biodiversity metric
+
+**Problem**: the research question could be too broad, leading to very time-consuming scoping and screening phases. It can also limit the sample size and the power of the analysis as it could create a situation of “Jack of all trades, master of none”. Therefore, it is recommended to narrow down the question.
+
+*Example*: what is the impact of organic agriculture on arachnid species abundance and richness relative to conventional agriculture?
+
+- Population: arachnids
+- Intervention: organic agriculture
+- Comparator: conventional agriculture
+- Outcome: arachnid quantitative species abundance and species richness
+
+This question defines the studies relevant to the research question: studies that provide a quantitative measure of arachnid species richness and abundance under organic agriculture compared to conventional agriculture. It also defines the type of effect size that will be used in the meta-analysis and therefore that data that will be extracted from the included studies. 
+
+*Examples of effect size*: in this case, as the goal is to compare a pair of means under different treatments, an effect size that compares means would be the right choice. The log response ratio or the standardized mean difference effect sizes would work. For more information on effect size estimates see Julia Koricheva's et al. book, found in 00.Resources >  Books > 00.Handbook_of_Meta-Analysis_in_Ecology_and_Evolution.pdf.
+
+**Document**: provide a description of the PICO elements that form your research question. These descriptions will be included in the protocol (see below).
+
+## 2. Pilot phase
+
+## 3. Scoping phase
+
+What is the available volume of literature relevant to the research question? The answer to this question will determine whether the meta-analysis can be done or whether some changes have to be made to the project design. Therefore, the review scoping helps to design the meta-analysis and develop an appropriate systematic review protocol.
+
+### 3.1 Develop the optimal string of search terms
+
+  a. Gather as many relevant search terms as possible
+  b. Remove terms already covered by other terms (e.g., “species richness” is covered by richness) and collapse terms that overlap by using wildcards (e.g., compare, comparison -> compar*).
+	c. Test proto string of search terms
+
+#### 3.1.1. Proto-string of search terms
+
+From scientific literature related to the topic, gather relevant terms that cover the PICO elements, then construct the proto string of search terms by combining the terms using Boolean operators and wild cards. 
+
+*Basic example:* 
+	
+- Population: arthropod, arachnid*, spider, araneae
+- Intervention: organic OR conventional
+- Comparator: compar*, contrast*
+- Outcome:  richness, abundance. 
+
+Proto-string of search terms*:
+
+*(Arthropod OR arachnid* OR spider OR Araneae OR aran*) AND (organic OR conventional) AND (compar*OR contrast*) AND (richness OR abundance). 
+
+#### 3.1.2. Refine the string of search terms
+
+Test the proto-string of search terms by an iterative process of inclusion-exclusion of terms. Perform a search in the data base using the proto-string of search terms and record how many relevant papers are returned in the first 20 abstracts. Is a term returning a high number of irrelevant papers? For example, the term arthropod might retrieve many papers that focus on species other than arachnids, which are not relevant to the research question. Therefore, drop the term arthropod and perform a new search. 
+
+*Extra method*: litsearchr 1.0.0 (Grames et al., 2020) is an R package that helps build optimal string of search terms as it facilitates quick, objective, reproducible search strategy development using text-mining and keyword co-occurrence networks to identify important terms to include in a search strategy.
+
+**Document**: for each iteration, record the string of search terms used, modifications made, number of hits and number of relevant papers in the first 20 abstracts.
+
+#### 3.2. Develop a systematic review protocol
+	
+This is the protocol that will be followed when performing the systematic literature review. The ROSES systematic review protocol includes the following elements: title, objective of the overview, definitions of the question components, search strategy, search string, bibliographic databases used, inclusion criteria, screening strategy, critical appraisal, meta-data extraction and coding strategy, data extraction strategy, approaches to missing data, effect modifiers, risk of bias, author contribution and competing interests.
+
+More information on ROSES systematic review protocol can be found in the ROSES website: <https://www.roses-reporting.com/systematic-review-protocols>
+
+**Document**: provide a systematic review protocol in your supplementary material.
+
+
+## 4. Screening
+
+### 4.1. Download studies 
+
+Perform a database search using the optimal string of search terms. Use both primary and secondary data bases. The search in secondary data bases helps find grey literature and therefore reduce publication bias. Examples of primary data bases are Scopus or Web of Science. Secondary data bases depend on the research question, some examples could be Google Scholar, (…).
+
+Download the studies retrieved by the data base using your optimal string of search 
+terms.
+
+**Document**:  data bases searched, number of hits returned, any filters applied. If the different databases requite tailoring of the string of search terms, document all the versions of the string of search terms used in the different data bases.
+
+### 4.2. Deduplication
+
+Download all the studies returned in the searches and remove the duplicates. To do so, use a reference manager such as EndNote or Mendeley and apply the deduplication protocol described Bramer et al., (2016). 
+
+**Document:** take note of the number of duplicates discarded.
+
+### 3.3. Screen for relevance
+
+Screen the deduplicated list of studies to search for studies relevant to the research question following the inclusion\exclusion criteria established in the protocol.
+
+*Example*: I will screen the list to search for studies that assess the impact of organic agricultural production systems on arachnid species abundance and species richness relative to conventional production systems.
+
+To speed up the process, perform two or even three rounds of screening for relevant papers. In the first round, screen the titles and abstracts of the list of papers and discard all studies that are obviously irrelevant to the research question. In the second round, screen more meticulously the title and abstract of the remaining papers. In the third round I perform a full-text screen of the remaining papers to check for relevance.
+Extra method: use the MetaGear 0.7 package (Lajeunesse, 2016) R package, a tool to screen titles and abstracts for relevance.
+
+**Document:** 
+- Assign an exclusion reason to the excluded papers. The exclusion reason for the studies excluded in the first round is “not relevant”. The exclusion reason(s) of the studies rejected in the second and third round can be many, e.g., not relevant, does not include biodiversity measure, does not compare organic and conventional production systems, etc.
+- Provide a list of the exclusion reasons with the number of papers rejected per exclusion reason. 
+- Provide a list of the references of the included and excluded studies.
+- Provide a flow diagram that documents the screening process (ROSES, 2022c).
+
+## 5. Data extraction phase
+
+Extract the data from the relevant papers.
+
+### 5.1. Data extraction spread sheet
+
+Build an excel data extraction spread sheet where the extracted data will be recorded. Data includes information about the study (e.g., study ID, authors, title, etc.), quantitative variables that will be used to calculate the effect size, and qualitative variables that will be used for moderator analysis. The quantitative variables recorded will depend on the effect size chosen to perform the meta-analysis, e.g., if performing the meta-analysis using the Log Response Ratio effect size, then mean and variance under each treatment should be recorded.
+
+*Extra method*: use the metaDigitise 0.7 (Lajeunesse, 2016) R package to extract data from figures 
+
+*Example of variables recorded in the data extraction spread sheet:* 
+
+- Information about the study: study id, authors, title, URL, year, journal, volume, issue, pages, month, DOI, abstract, database.
+
+- Qualitative variables: country, geographical coordinates (latitude, longitude), biome, crop, phylum, class, order, family, genus, species, functional group, control and intervention (conventional and organic), tillage use, pesticide use, biodiversity metric (richness or abundance), data extracted from, etc.
+
+- Quantitative variables: sample size, mean, standard deviation, quality score, etc.
+
+### 5.2. Pilot the data extraction spread sheet
+
+Pilot the data extraction spread sheet using a random sample of ten studies from the pool of relevant studies. Remove irrelevant variables or add variables.
+
+**Document:** provide a list of all the variables included in the data extraction spreadsheet and a brief description. Provide a list of the variables removed and added after the piloting of the spread sheet. 
+In the case that data transformations are needed, provide the data transformation methodologies and document on which studies they were performed.
+
+### 5.3. Data extraction
+
+Extract the data from the relevant papers and record it in the data extraction spread sheet.
+
+## 6. Effect size calculation
+
+## 7. Meta-analysis
+
+Depending on the research question, different methodologies can be applied to perform a meta-analysis. For a detailed description of how to perform different types of meta-analyses in R, see (Viechtbauer, 2010). For a tutorial on multi-level meta-analysis, Assink & Wibbelink (2016).
+
+### 7.1 Senitivity analysis 
+
+A sensitivity analysis to study the effect of lower quality studies on the results is recommended. Conduct a sensitivity analysis to assess the robustness of the results of the complete model when excluding studies of lower quality from the analysis.
+
+### 7.2. Bias asessment
+
+Something else to consider is the assessment of bias. There are different types of bias that can arise in meta-analyses, such as:
+
+- Publication bias: this type of bias can be assessed with a funnel plot and reduced by including grey literature.
+- Reviewer bias: it can be assessed kappa test.
+- Language bias: can by reduced by included papers written in different languages.
+
+**Document:** provide a figure that assesses the bias such as a funnel plot.
+
+# This meta-analysis and your tasks
+
+But, in this case, instead of a meta-analysis, we are going to perform a meta-meta-analysis. The steps are the same as those for a meta-analysis. The difference is that our sources of data will be reviews and meta-analyses, instead of individual studies.
+
+The goal of this meta-review is to sum up existing information on the impact of different cropping and livestock systems on biodiversity. I will create a "gradient" that categorises each farming system’s impact on biodiversity, from least to most impactful.
+
+The idea is to see what is known about the relative biodiversity impact of the main ways of farming.
+
+
+ <!-- student's goal or goal of the students placement -->
+
+## 1. Question
+
+Primary question: How do the production systems of top global crops and livestock impact biodiversity? 
+
+## 2. Scoping phase
+
+### 2.1 String of search terms
+
+I used the string of search terms found in 00.Resources > 00.Scoping phase > 00.Strings of search terms. You can find the process of development of the optimal string of search terms in the same document. 
+
+### 2.2. Systematic review protocol
+
+Guidelines on what to include in your systematic review protocol can be founf in CEE's website <https://environmentalevidencejournal.biomedcentral.com/submission-guidelines/preparing-your-manuscript/systematic-review-protocol>. Also, you can find an example of the systematic review protocol in 00.Resources > 00. Scoping phase > 01.Systematic review protocol example.pdf
+
+**TASK:** try to develop an optimal string of search terms for one of the crops, similar to the one I used but maybe including more terms  <!-- maybe focusing on a taxon? -->
+
+## 3. Screening
+
+### 3.1. Download and deduplicate
+
+Download the studies you have obtained, add them to the and deduplicate them using the example provided by **Bramer et al** (00.Resources > 01.Screening phase > 00.Bramer, M., et al., 2016.pdf). 
+Once you have deduplicated the list of studies, you can export them into an excel or csv file following this tutorial <https://www.youtube.com/watch?v=yFwNYoBgeeg&t=8s&ab_channel=AULibrary>
+
+### 3.2. Title and abstract screening
+
+To avoid screening and extracting data from studies that have already been screened and included in the meta-meta analysis, run the following code. With this code, you will exclude from your list of studies those stidies that have already been screened and included in the meta-analysis.
+
+```{r, eval = FALSE}
+
+studies_already_done <- # This is a csv with the studies that have already been 
+  # included in the meta-meta analaysis
+  
+studies_you_have_found <- # This is the deduplicated list of the studies you have found 
+
+studies_to_screen <- # This is the list of the studies you have found that have not been screened and included in the meta-analysis.
+
+```
+
+Now that you have your list of studes you have found and have not been screened yet for this meta-analysis, proceed to deduplicate them using the R package metaGear. The advantage of metaGear is that it helps speed up the screening phase. 
+
+Before proceeding, take a look at metaGears package description and the vignette that explains how to use it. You can find these files in 00.Resources > 01.Screening phase > 01.Metagear.pdf AND 02.Metagear_vignette.pdf.
+
+Now, you have to screen the papers for relevance according you you inclusion criteria, which you have specified in your systematic review protocol. In the following code, I will walk you through the use of metaGear. *Watch out because you have to fill in the character strings in the functions' arguments!*
+
+<!-- check the installing code is fine -->
+
+```{r, eval = FALSE}
+
+install.packages("metagear") # Install the package you will need This is like 
+                             # installing an app on your phone. You only need to
+                             # do it once.
+library(metagear) # Load the package you are going to use. This is like opening
+                  # an app you are going to use. You need to do ir every time you 
+                  # use it
+
+# Now you have to screen the references to classify them as relevant (YES), maybe relevant (maybe) or 
+# not relevant (NO) to this meta-analysis.
+# Initialize adds three columns: study_ID, reviewers (in this case only you) and INCLUDE (yes, no, maybe).
+# The function automatically saves a copy in the working directory. That is the file you will actually screen. 
+
+d_initialized <- effort_distribute(d,                              # effort_YourName.csv has been 
+                                   initialize = TRUE,              # saved in your working directory   
+                                   reviewers = "Your name",        
+                                   save_split = TRUE)
+
+      # Load initialized data
+
+screening <- read.csv("")
+
+      # Start screening the references with abstract_screener. References will be classified as yes, no, maybe 
+      # according to the inclusion criteria. RMEMEBER TO CLICK SAVE BEFORE YOU CLOSE THE INTERACTIVE WINDOW
+
+abstract_screener(file = "Working directory path to the file effort_YourName.csv",
+                  aReviewer = "Your name",
+                  abstractColumnName = "Abstract column name",
+                  titleColumnName = "Title column name",
+                  highlightKeywords = c("keywords you want metaGear to hightlight
+                                        in the interactive window"))
+
+     
+# Create a two data frames. One with the rejected papers and one with the potentially
+# relevant papers to assess in a second screen. Save the data frames. For help go to Resources > dplyr?
+# Also, since you have to report the exlusion reason, I would create a column of excluded reason = "Not relevant"
+# in the data frame of excluded studies.
+
+```
+
+### 3.3. Full-text screening
+
+Now that you have your list of studies classified as "yes" or "maybe", it is time to assess them for eligibility at full text. Which means you have to read them and include or exclude them from the meta-analysis according to your exclusion criteria. 
+
+In this case, when recording the exclusion reason you have to be more specific than simply saying "Not relevant". The exclusion reason should be related to your PICO elements and inclusion criteria (e.g., not population of interest, does not provide data in required format, etc.)
+
+Extra tip, you can do this phase at the same time as you extract the data, which will avoid having to read studies twice. So if you come across a relevant study, just go ahead and extract its data.
+
+
+## 4. Data extraction phase
+
+In this phase you will extract the quantitative and qualitative variables of interest from the relevant studies. You have to chose the variables according to your research question. For more information, see Julia Koricheva's et al. book, found in 00.Resources >  Books > 00.Handbook_of_Meta-Analysis_in_Ecology_and_Evolution.pdf.
+
+### 4.1. Developing the optimal data extraction spreadsheet
+
+First, make a preliminary data extraction spreadsheet with the quantitative and qualitative variables of interest. The data you will extract from the studies depend on:
+
+  - What is your research question?
+  - What information do you need to reply to your research question?
+  - **What type effect size are you going to calculate ?**
+  - What data do you need to calculate the effect size?
+
+Once you have your preliminary data extraction spreadsheet, you have to pilot it to include variables you did not think off, drop those irrelevant, and reformat it to obtain the optimal data extraction spreadsheet. Take ~ 10 relevant studies and pilot your data extraction spreadsheet with them.
+
+**TASK**: develop a preliminary data extraction spread sheet and pilot it with ~ 10 relevant studies.
+
+You can find an example of a data extraction spreadsheet in 00.Resources > 02.Data extraction > Data extraction spreadsheet example.xlsx
+
+### 4.2. Effect size 
+
+An effect size is a statistical parameter that integrates results from individual studies, allowing you to compare and contrast them, formulate new hypotheses, and perform further analyses (meta-analyses). You have to chose the effect size you will use to perform your meta-analysis according to *your research question* (suprise!).
+
+For more information on the different types of effect sizes and the data needed to obtain them go, once again, to Julia Koricheva's book. 
+
+However, in this case, since we are doing a meta-meta-analysis and variance data needed to calculate the effect size is often not reported in reviews, we are going to do the analysis in a classic linear mixed model.
+
+### 4.3. Data extraction 
+
+Basically, extract the data from the relevant papers and input it in your data extraction spreadsheet. Here is a messy example on hoe to do it!
+
+![](Rmd_Images/Data_extraction_example.PNG)
+
+### 4.5. Dataset curation
+
+<!-- include data set curation code -->
+
+
+## 5. Effect size calculation and meta-analysis
+
+Once you have all the data you need you can proceed to perform the meta-analysis. As I mentioned before, since in this case the data comes from reviews and meta-analisis where variance data is often not provided, we are going to perform a linear mixed model in the classic way instead of performing a meta-analysis with the metafor R package. However, I am first going to show you how to perform a meta-analysis with the metafor package in any case, because it is easy and fast and straightforward, and then you will know how to do it!
+
+### 5.1. Meta-analysis with the metafor package
+
+First, I strongly recommend reading the metafor package (Viechtbauer, 2010) instructions on how to perform a meta-analysis with the metafor package. I recommend this not only because it describes and exemplifies how to use the package, but also because it explains the statistical logic of a meta-analysis, which is something you want to know to interprete your results correctly and perform a strong meta-analysis. You can find the instructions in 00.Resources > 03.Analysis > 00.Conducting Meta-Analyses in R with the metafor package.pdf
+
+*Meta-analysis with metafor example*
+
+In this case I am studying the impact of organic agricultural systems on arthropod species richness and abundance compared to conventional agricultural practices. I chose the Log Response Ratio effect size for various reasons:
+
+- It compares means under two treatments (organic vs. conventional)
+- I can be back transformed into a percentage, so it is very intuitive
+- It standardized methodologies and study designs, so you can compare studies that apply different methodologies.
+
+```{r, eval = FALSE}
+
+install.packages("metafor")   # Install metafor package
+library(metaor)   # Load the package
+
+d <- read.csv("your curated dataset.csv") # Load the data
+
+d <- subset(d, d$Comparison == "Agroecological.vs.Conventional" ) # Subset the data of interest. In this case,
+                                                                  # data that compares organic vs. conventional 
+                                                                  # agricultural systems
+```
+
+Now that we have our data, we proceed to calculate the effect size which, in this case, is the Log Response Ratio. To calculate it we need the species richness mean and standard deviation under each treatment and the sample size:
+
+$$LRR = ln(\frac{\overline{x_{a}}}{\overline{x_{b}}})$$
+And its associated variance
+
+$$v = \frac{SD_{a}^2}{n_{a}*\overline{x_{a}}^2} + \frac{SD_{b}^2}{n_{b}*\overline{x_{b}}^2}$$
+
+#### 5.1.1. Calculate the log response ratio 
+
+```{r, eval = FALSE}
+
+?escalc()  # Read through the function help to understand what each argument does.
+
+# The escalc function uses the mean, standard deviation and sample size to obtain the LRR and its 
+# variance. It will add two columns to the data frame (that is saved as d_with_LRR): a column with the 
+# log response rations and a column with their variances. 
+
+d_with_LRR <- escalc(measure = "ROM",          
+                n1i = ac$Sample_size_1,
+                n2i = ac$Sample_size_2,
+                m1i = ac$Mean_1,
+                m2i = ac$Mean_2,
+                sd1i = ac$SD_1,
+                sd2i = ac$SD_2,
+                digits = 4, 
+                data = ac, 
+                var.names = c("LRR","LRR_var"), 
+                append = TRUE)
+
+view(d_with_LRR)
+```
+
+
+#### 5.1.2. Check for outliers
+
+You are going to check the distribution of the log response rations and their variance.
+
+```{r, echo =FALSE}
+
+hist(d_with_LRR$LRR)
+hist(d_with_LRR$LRR_var)
+
+```
+
+If you find any outliers, go back to the in the data set:
+
+- Are they mistakes? -> fix
+- Are they data? -> keep or drop. Think about it!
+
+#### 5.1.3. Perform the meta-analysis
+
+Once you have fixed the outliers (if there were any), it is now time to perform the meta-analysis! 
+
+Since many of the studies yielded multiple effect sizes, which are all informative but should not be treated as independent, you will perform a three-level meta-analysis following the tutorial provided by Assink & Wibbelink (2016). You can find the tutorial in 00.Resources > 03.Analysis > 01.Multilevel meta-analysis tutorial.pdf.
+
+The multi-level meta-analysis accounts for the non-independency of effect-size estimates by considering three levels of variance: sampling (level 1), within-study (level 2), and between-study (level 3) variance. The model is fitted as a random-effects model that takes **study ID** and **effect size ID** as random effects. Therefore, prior to the analysis, I you have to assign a unique ID to each effect- size record.
+
+```{r, eval = FALSE}
+
+#Add column of Effect Size ID (ES_ID)
+
+d_with_LRR$ES_ID <- (1:length(d_with_LRR$Paper_ID))
+
+```
+
+Now you can proceed to perform the three-level meta-analysis:
+
+```{r, eval = FALSE}
+
+?rma.mv()   # Read through the function help to understand what each argument does.
+
+model <- rma.mv(yi = d_with_LRR$LRR, 
+                V = d_with_LRR$LRR_var, 
+                random = list(~ 1 | ES_ID, ~ 1 | Paper_ID), # Include effect size ID and study ID
+                tdist = TRUE,                                 # as random effects account for the 
+                data = d_with_LRR )                             # non-independence of observations
+
+summary(model)   # See model output
+
+```
+
+### 5.1.4. Test for within-study heterogeneity significance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
