@@ -1,3 +1,13 @@
+# Folders 
+
+/00.Resources
+/02.Scripts/Rmd_Images
+
+#Files
+
+*.Rmd
+
+
 # History files
 .Rhistory
 .Rapp.history
@@ -6,7 +16,7 @@
 .RData
 
 # User-specific files
-.Ruserdata
+.Ruserdata..
 
 # Example code in package build process
 *-Ex.R
